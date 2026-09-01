@@ -1,0 +1,11 @@
+{
+  "name": "bedtime-stories",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Pick a few sparks, get a bedtime story to tell. Static app + one Vercel function.",
+  "scripts": {
+    "dev": "vercel dev",
+    "check": "node --check api/story.js && node --check public/app.js && node --check public/sw.js"
+  }
+}
