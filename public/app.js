@@ -78,6 +78,22 @@ const md = (s) =>
 
 const prefs = store.get("bsm:prefs", {});
 
+let night = store.get("bsm:night", false) === true;
+
+function applyNight() {
+  document.body.classList.toggle("night", night);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.content = night ? "#060409" : "#160f2b";
+  const btn = $("#btn-night");
+  if (btn) btn.textContent = night ? "☾ Undim" : "☾ Dim";
+}
+
+function toggleNight() {
+  night = !night;
+  store.set("bsm:night", night);
+  applyNight();
+}
+
 const state = {
   audience: CONFIG.audiences.includes(prefs.audience) ? prefs.audience : CONFIG.audiences[0],
   audienceCustom: typeof prefs.audienceCustom === "string" ? prefs.audienceCustom : "",
@@ -353,7 +369,10 @@ function renderStory() {
       .join("");
     html += `
       <article class="paper">
-        <h2>${escapeHtml(state.story.title)}</h2>
+        <div class="paper-top">
+          <h2>${escapeHtml(state.story.title)}</h2>
+          <button type="button" class="btn small" id="btn-night">${night ? "☾ Undim" : "☾ Dim"}</button>
+        </div>
         <ol class="beats">${beats}</ol>
         <div class="foot">
           <span>✦ Now add the silly voices — that part's all you.</span>
@@ -381,6 +400,8 @@ function renderStory() {
   }
   const again = $("#btn-again");
   if (again) again.addEventListener("click", tellStory);
+  const nightBtn = $("#btn-night");
+  if (nightBtn) nightBtn.addEventListener("click", toggleNight);
 }
 
 // ---------------------------------------------------------------- extras
@@ -435,6 +456,7 @@ function registerServiceWorker() {
 
 // ---------------------------------------------------------------- init
 
+applyNight();
 buildBuilder();
 ["audience", "vibe", "length", ...STORY_FIELDS].forEach(renderChips);
 renderMenuStatus();

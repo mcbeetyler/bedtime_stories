@@ -3,7 +3,7 @@
 //
 // Bump VERSION whenever you change files in /public so phones pick up the
 // new build on next open.
-const VERSION = "bsm-v1";
+const VERSION = "bsm-v2";
 const SHELL = [
   "/",
   "/styles.css",

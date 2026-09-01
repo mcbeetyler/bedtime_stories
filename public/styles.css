@@ -156,6 +156,31 @@ h1 {
 .hint { text-align: center; font-family: var(--font-hand); font-size: 19px; color: var(--muted); margin: 18px 0 0; }
 .hint button { background: none; border: none; color: var(--gold); cursor: pointer; text-decoration: underline; padding: 0 4px; }
 
+/* ---------- night dim ---------- */
+/* body.night swaps the bright story paper for a near-black, low-glow palette
+   so the phone doesn't light the room mid-story. Toggled by the 🌙 button. */
+.paper-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.paper-top h2 { flex: 1; }
+
+body.night { background: #060409; }
+body.night #stars { opacity: .2; }
+body.night .hero, body.night #builder, body.night .hint { opacity: .4; }
+body.night .paper {
+  background: #14111f;
+  color: #b3a68e;
+  box-shadow: none;
+}
+body.night .paper h2 { color: #9a87bd; }
+body.night .paper.loading p { color: #776a92; }
+body.night .beat .n { background: #2b2340; color: #b3a68e; }
+body.night .beat strong { color: #d0c2a6; }
+body.night .beat em { color: #a693c9; }
+body.night .beat.ask { background: rgba(255, 255, 255, 0.05); }
+body.night .foot { color: #776a92; border-top-color: rgba(255, 255, 255, 0.12); }
+body.night .paper .btn { color: #9a87bd; border-color: rgba(154, 135, 189, 0.35); background: transparent; }
+
+.paper, .paper h2, .beat .n, .foot, body { transition: background-color .3s ease, color .3s ease; }
+
 @media (prefers-reduced-motion: reduce) {
   .star, .pulse { animation: none; }
 }
